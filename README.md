@@ -1,5 +1,5 @@
 # WhatsAmigo - api
-![WhatsAmigo-api](https://github.com/Babuperumana/WhatsAmigo/blob/master/static/media/zapzap-api.png?raw=true)
+![WhatsAmigo-api](https://github.com/Babuperumana/WhatsAmigo/master/static/media/zapzap-api.png?raw=true)
 
 This project is based on the [Venom-bot](https://github.com/orkestral/venom), a virtual browser without a graphical interface that opens whatsapp web and executes all commands via code, thus enabling the automation of all functions.
 
@@ -49,11 +49,11 @@ This project is based on the [Venom-bot](https://github.com/orkestral/venom), a 
 ## Usage
 - Register and login in the system, after that you will be redirected to the following screen:
 
-  <img src="https://github.com/Babuperumana/WhatsAmigo/blob/master/static/media/qrcode_read.png?raw=true" width="400">
+  <img src="https://github.com/Babuperumana/WhatsAmigo/master/static/media/qrcode_read.png?raw=true" width="400">
 
 - Siga as instruções na tela e se abrirá uma tela de testes como essa:
 
-  <img src="https://github.com/Babuperumana/WhatsAmigo/blob/master/static/media/send_message.png?raw=true" width="400">
+  <img src="https://github.com/Babuperumana/WhatsAmigo/master/static/media/send_message.png?raw=true" width="400">
 
 
 - Test as much as you like if you like our service and want to hire us send an email to [babuperumana@gmail.com](babuperumana@gmail.com)
