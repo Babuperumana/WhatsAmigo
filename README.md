@@ -1,5 +1,5 @@
 # WhatsAmigo - api
-![WhatsAmigo-api](https://github.com/Babuperumana/WhatsAmigo/master/static/media/zapzap-api.png?raw=true)
+![WhatsAmigo-api](https://github.com/Babuperumana/WhatsAmigo/static/master/static/media/zapzap-api.png?raw=true)
 
 This project is based on the [Venom-bot](https://github.com/orkestral/venom), a virtual browser without a graphical interface that opens whatsapp web and executes all commands via code, thus enabling the automation of all functions.
 
