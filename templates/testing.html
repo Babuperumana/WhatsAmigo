@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="">
+	<title>Test message sending</title>
+
+	<link rel="apple-touch-icon" type="image/png" href="" />
+	<meta name="apple-mobile-web-app-title" content="WhatsAmigo Api">
+	<link rel="shortcut icon" type="image/x-icon" href="" />
+	<link rel="mask-icon" type="" href="" color="#111" />
+	<title>WhatsAmigo Api</title>
+	<link rel='stylesheet' href='css/font_awesome.min.css'>
+	<link rel='stylesheet' href='css/bootstrap.min.css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="controllers/notify.js"></script>
+
+
+
+
+<style>
+.main-content{
+	width: 50%;
+	border-radius: 20px;
+	box-shadow: 0 5px 5px rgba(0,0,0,.4);
+	margin: 5em auto;
+	display: flex;
+}
+.company__info{
+	background-color: #008080;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: #fff;
+}
+.fa-android{
+	font-size:3em;
+}
+@media screen and (max-width: 640px) {
+	.main-content{width: 90%;}
+	.company__info{
+		display: none;
+	}
+	.login_form{
+		border-top-left-radius:20px;
+		border-bottom-left-radius:20px;
+	}
+}
+@media screen and (min-width: 642px) and (max-width:800px){
+	.main-content{width: 70%;}
+}
+.row > h2{
+	color:#008080;
+}
+.login_form{
+	background-color: #fff;
+	border-top-right-radius:20px;
+	border-bottom-right-radius:20px;
+	border-top:1px solid #ccc;
+	border-right:1px solid #ccc;
+}
+form{
+	padding: 0 2em;
+}
+.form__input{
+	width: 100%;
+	border:0px solid transparent;
+	border-radius: 0;
+	border-bottom: 1px solid #aaa;
+	padding: 1em .5em .5em 2em;
+	outline:none;
+	margin:1.5em auto;
+	transition: all .5s ease;
+}
+.form__input:focus{
+	border-bottom-color: #008080;
+	box-shadow: 0 0 5px rgba(0,80,80,.4);
+	border-radius: 4px;
+}
+
+#notifications {
+    cursor: pointer;
+    position: fixed;
+    padding-top: 10px;
+    right: 0px;
+    z-index: 9999;
+    /*bottom: 0px;*/
+    margin-bottom: 22px;
+    margin-right: 15px;
+    max-width: 300px;
+}
+
+</style>
+
+<script>
+  window.console = window.console || function(t) {};
+</script>
+
+
+
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body>
+  <div id="notifications"></div>
+	<div class="container-fluid">
+		<div class="row main-content bg-success text-center">
+			<div class="col-md-4 text-center company__info">
+				<span class="company__logo"><img style="width: 100%;" src="/media/zapzap-api.png" alt=""></span>
+			</div>
+			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+				<div class="container-fluid">
+					<div class="row">
+						<h2>Test message sending</h2>
+					</div>
+					<div class="row">
+						<form control="" class="form-group">
+							<div class="row">
+								<label for="number"></label><input type="text" name="number" id="number" class="form__input" placeholder="Enter a contact number" value="91" required="required">
+							</div>
+							<div class="row">
+                <label for="message"></label><textarea type="text" name="message" id="message" class="form__input" placeholder="Type your message"></textarea>
+							</div>
+							<div class="row">
+								<div class="col-lg-3 col-md-4 col-sm-4 col-xs-4">
+									<button type="button" onclick="window.location = '/'" class="btn btn-default">Home</button>
+								</div>
+								<div class="col-lg-6 col-md-4  col-sm-4 col-xs-4">
+									<button type="button" onclick="logout()" class="btn btn-warning">Logout</button>
+								</div>
+								<div class="col-lg-3 col-md-4  col-sm-4 col-xs-4">
+									<button type="button" onclick="send()" class="btn btn-success">Send Message</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="row">
+            <div id="send_message"></div>
+					</div>
+          <br>
+					<div class="row">
+						<p>Not have an account yet? <a href="/register">Register here!</a></p>
+						<p style="cursor: pointer"><a onclick="delete_user()">Remove Account</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<div class="container-fluid text-center footer">
+		<p>Created with &hearts; using <a href="https://github.com/cleitonleonel">Babu Perumana</a></p>
+	</div>
+</body>
+<script>
+  function send() {
+    let number = $('#number').val();
+    let message = $('#message').val();
+    let key = window.localStorage.getItem('session_key');
+    let host = window.location.host;
+    let link_send = 'Send messages with this link: ' + host + '/api/sendText/?sessionName=' + key + '&number=COUNTRY CODE + CONTACT NUMBER&text=TYPE YOUR MESSAGE HERE';
+    $("#send_message").text(link_send);
+
+		if (number !== "") {
+      let payload = {
+        sessionName: key,
+        number: number,
+        text: message,
+        //csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+      }
+      $.ajax({
+        type: 'get',
+        url: '/api/sendText/',
+        contentType: "application/json; charset=utf-8",
+        data: payload,
+        success: function (response) {
+          if (response.result === 'success') {
+						$('#message').val("");
+            notification('Mensagem enviada com sucesso!!!', null, null, 'success');
+          } else {
+						$('#message').val("");
+          	notification('Tente novamente em instantes...', null, null, 'warning');
+            document.getElementById("number").focus();
+          }
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+          notification(errorThrown, null, null, 'danger');
+        }
+      });
+    } else {
+		  document.getElementById("number").focus();
+    }
+  }
+
+  function notification(text, callback, close_callback, style){
+    Notify(text, callback, close_callback, style);
+  }
+</script>
+<script>
+function logout() {
+	window.localStorage.setItem('user_id', '')
+	window.localStorage.setItem('session_key', '')
+	window.location = '/';
+}
+
+function logout1(){
+	let key = window.localStorage.getItem('session_key');
+	let payload = {
+		sessionName: key,
+		//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+	}
+	$.ajax({
+		type: 'get',
+		url: '/api/close',
+		contentType: "application/json; charset=utf-8",
+		data: payload,
+		success: function (response) {
+			alert(JSON.stringify(response));
+			if (response.result === 'success') {
+				notification(response.message, null, null, 'success');
+				window.location = '/';
+			} else if(response.result === 'error'){
+				notification(response.message, null, null, 'warning');
+				document.getElementById("number").focus();
+			}
+		},
+		error: function (XMLHttpRequest, textStatus, errorThrown) {
+			notification(errorThrown, null, null, 'danger');
+		}
+	});
+}
+function delete_user(){
+	let key = window.localStorage.getItem('session_key');
+	let user_id = window.localStorage.getItem('user_id');
+	if (user_id) {
+		let payload = {
+			sessionName: key,
+			user_id: user_id,
+			//csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+		}
+		$.ajax({
+			type: 'post',
+			url: '/api/user/delete/',
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(payload),
+			success: function (response) {
+				if (response.success) {
+					notification(response.message, null, null, 'success');
+					window.location = '/';
+				} else {
+					notification(response.message, null, null, 'warning');
+					document.getElementById("number").focus();
+				}
+			},
+			error: function (XMLHttpRequest, textStatus, errorThrown) {
+				notification(errorThrown, null, null, 'danger');
+			}
+		});
+	}
+}
+</script>
+</html>
