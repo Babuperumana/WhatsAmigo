@@ -1,12 +1,12 @@
 {
-  "name": "zapzap-api",
+  "name": "WhatsAmigo",
   "version": "1.0.0",
   "description": "Free OpenSource Whatsapp Api",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Bill Barsch",
+  "author": "Babu Perumana",
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
@@ -29,11 +29,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cleitonleonel/zapzap-api.git"
+    "url": "git+https://github.com/Babuperumana/WhatsAmigo.git"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/cleitonleonel/zapzap-api/issues"
+    "url": "https://github.com/Babuperumana/WhatsAmigo/issues"
   },
-  "homepage": "https://github.com/cleitonleonel/zapzap-api#readme"
+  "homepage": "https://github.com/Babuperumana/WhatsAmigo/#readme"
 }
